@@ -4,6 +4,7 @@ extends CharacterBody2D
 var started
 var main_node
 var player_node
+var speed = -200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,18 +14,21 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	if not started:
 		velocity = player_node.linear_velocity
 		started = main_node.is_started()
 		if started:
-			velocity = Vector2(player_node.linear_velocity.x, -200)
+			velocity = Vector2(player_node.linear_velocity.x, speed)
 		
 		
 func _physics_process(delta):
 	if not main_node.ended:
 		var collision = move_and_collide(velocity * delta)
 		if collision:
-			if (collision.get_collider().to_string() == "EndWall:<StaticBody2D#24847058140>"):
+			var collider_name = collision.get_collider().name
+			if (collider_name == "EndWall"):
 				main_node.end_game()
+			if (collider_name == "Player"):
+				main_node.add_score()
+				velocity *= 1.1
 			velocity = velocity.bounce(collision.get_normal())
