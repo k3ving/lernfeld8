@@ -16,3 +16,8 @@ func _process(delta):
 		score +=1
 	if ended:
 		print(score)
+
+
+func end_game():
+	ended = true
+	print("Your final score is: ", score)

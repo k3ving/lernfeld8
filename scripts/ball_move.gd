@@ -22,9 +22,9 @@ func _process(delta):
 		
 		
 func _physics_process(delta):
-	var collision = move_and_collide(velocity * delta)
-	if collision:
-		velocity = velocity.bounce(collision.get_normal())
-
-func _on_ball_body_entered(body):
-	print(body.get_parent().name)
+	if not main_node.ended:
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			if (collision.get_collider().to_string() == "EndWall:<StaticBody2D#24847058140>"):
+				main_node.end_game()
+			velocity = velocity.bounce(collision.get_normal())

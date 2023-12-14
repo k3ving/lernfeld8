@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ro0q5ke6phgs"]
+[gd_scene load_steps=5 format=3 uid="uid://bfkkkmifk1r3y"]
 
 [ext_resource type="Script" path="res://scripts/ball_move.gd" id="1_ese87"]
 [ext_resource type="Texture2D" uid="uid://dsman3oafq7qt" path="res://sprites/circle.png" id="1_mmsav"]
