@@ -13,13 +13,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	started = main_node.is_started()
 	
 	if not started:
-	
 		velocity = player_node.linear_velocity
-	else:
-		velocity = Vector2(player_node.linear_velocity.x, -200)
+		started = main_node.is_started()
+		if started:
+			velocity = Vector2(player_node.linear_velocity.x, -200)
 		
 		
 func _physics_process(delta):
