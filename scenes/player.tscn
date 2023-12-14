@@ -1,23 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://ele85ubqy84y"]
+[gd_scene load_steps=4 format=3 uid="uid://c3yj0xeromvta"]
 
 [ext_resource type="Script" path="res://scripts/player_move.gd" id="1_q3k17"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvnbv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_whfcb"]
 size = Vector2(58, 20)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_xsq77"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_418vh"]
 
-[node name="Player" type="Node2D"]
-scale = Vector2(3, 3)
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="Player" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_q3k17")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("RectangleShape2D_kvnbv")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_whfcb")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D/CollisionShape2D"]
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
 position = Vector2(1.90735e-06, 3.57628e-07)
 scale = Vector2(58, 20)
-texture = SubResource("CanvasTexture_xsq77")
+texture = SubResource("CanvasTexture_418vh")

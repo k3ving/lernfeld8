@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends CollisionShape2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -9,9 +9,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-	
 
 
-func _on_body_entered(body):
-	print("Hallo")
-	print(body.get_node("Player"))
+func _on_ball_body_entered(body):
+	pass # Replace with function body.
