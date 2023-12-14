@@ -18,7 +18,7 @@ position = Vector2(640, 593)
 position = Vector2(640, 571)
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
-position = Vector2(-5, 315)
+position = Vector2(165, 315)
 scale = Vector2(1, 100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
@@ -26,7 +26,7 @@ position = Vector2(-6, 0)
 shape = SubResource("RectangleShape2D_lmqo4")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
-position = Vector2(1159, 315)
+position = Vector2(1005, 315)
 scale = Vector2(1, 100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
@@ -40,3 +40,10 @@ scale = Vector2(8.64, 2.16)
 position = Vector2(-0.462963, -3.7037)
 scale = Vector2(6.75926, 1)
 shape = SubResource("RectangleShape2D_ieovl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 4.0
+offset_top = 12.0
+offset_right = 44.0
+offset_bottom = 52.0
+scale = Vector2(3.76, 2.32)
