@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bahdaxdq4y5ma"]
 
 [ext_resource type="Script" path="res://scripts/game_state.gd" id="1_ffi2s"]
-[ext_resource type="PackedScene" uid="uid://c3yj0xeromvta" path="res://scenes/player.tscn" id="1_oma3g"]
-[ext_resource type="PackedScene" uid="uid://bfkkkmifk1r3y" path="res://scenes/ball.tscn" id="2_46ja2"]
+[ext_resource type="PackedScene" uid="uid://ddel7c7l6uqkb" path="res://scenes/player.tscn" id="1_oma3g"]
+[ext_resource type="PackedScene" uid="uid://ro0q5ke6phgs" path="res://scenes/ball.tscn" id="2_46ja2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmqo4"]
 
