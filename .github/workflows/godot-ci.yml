@@ -4,7 +4,7 @@ on: push
 env:
   GODOT_VERSION: 3.3.4
   EXPORT_NAME: lernfeld8
-  PROJECT_PATH: ../..
+  PROJECT_PATH: /home/kevin/Projects/Schoolprojects/lernfeld8
 
 jobs:
   export-windows:
