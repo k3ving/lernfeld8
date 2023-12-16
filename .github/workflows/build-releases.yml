@@ -1,6 +1,7 @@
 name: Build Releases
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       steamworks_sdk_tag:
