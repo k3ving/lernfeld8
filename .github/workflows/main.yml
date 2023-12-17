@@ -23,5 +23,5 @@ jobs:
         relative_project_path: ./
         create_release: true
       env:
-        GITHUB_TOKEN: ${{ secret.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
