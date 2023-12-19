@@ -1,0 +1,25 @@
+CREATE PROCEDURE [dbo].[GetHighscores]
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT TOP(100)
+		[Users].[UserName] AS 'User',
+		[Scores].[Score]
+	FROM [Scores]
+		INNER JOIN [Users] ON [Scores].[UserId] = [Users].[Id]
+	ORDER BY ([Scores].[Score]) DESC
+END
+_________________________________________________________________________________
+
+CREATE PROCEDURE [dbo].[AddScore]
+	@User nvarchar(64),
+	@Score int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+    	INSERT INTO [dbo].[Scores] ([UserId], [Score], [CreatedOn])
+	VALUES ((SELECT [Id] FROM [dbo].[Users] WHERE [UserName] = @User), @Score, CURRENT_TIMESTAMP)
+END
+_________________________________________________________________________________
