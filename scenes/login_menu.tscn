@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxsu1oqgmewpu"]
+
+[ext_resource type="Script" path="res://scripts/login_request.gd" id="1_t5f0v"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_right = 250
+
+[node name="UsernameInput" type="TextEdit" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Your username..."
+scroll_smooth = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_right = 250
+
+[node name="PasswordInput" type="TextEdit" parent="VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Your password..."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Login Button" type="Button" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Login"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Register Button" type="Button" parent="VBoxContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Register"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+script = ExtResource("1_t5f0v")
+
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/MarginContainer/Login Button" to="HTTPRequest" method="_on_button_button_down"]

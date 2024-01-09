@@ -23,3 +23,34 @@ BEGIN
 	VALUES ((SELECT [Id] FROM [dbo].[Users] WHERE [UserName] = @User), @Score, CURRENT_TIMESTAMP)
 END
 _________________________________________________________________________________
+
+CREATE PROCEDURE [dbo].[Login]
+	@User nvarchar(64),
+	@Password nvarchar(128)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT
+    CASE WHEN EXISTS 
+    (
+        SELECT * FROM [Users] WHERE [UserName] = @User AND [Password] = @Password
+    )
+    THEN 1
+    ELSE 0
+END
+_________________________________________________________________________________
+
+CREATE TABLE [dbo].[Scores](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[Score] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL
+) ON [PRIMARY]
+__________________________________________________________________________________
+
+CREATE TABLE [dbo].[Users](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](64) NOT NULL,
+	[Password] [nvarchar](max) NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]

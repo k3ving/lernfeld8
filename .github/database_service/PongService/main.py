@@ -28,6 +28,32 @@ def get_highscores():
         data.append(list(row))
     return data
 
+@app.route("/pongservice/login", methods=['GET'])
+def login():
+    user = request.args.get('user')
+    password = request.args.get('password')
+
+    password_encoded = password.encode("ascii")
+    password_base64_bytes = base64.b64encode(password_encoded)
+    password_base64_string = password_base64_bytes.decode("ascii")
+
+    db_connection = DbConnector()
+    result = db_connection.login(user, password_base64_string)
+    return jsonify(result[0]), 200
+
+@app.route("/pongservice/register", methods=['GET'])
+def register():
+    user = request.args.get('user')
+    password = request.args.get('password')
+
+    password_encoded = password.encode("ascii")
+    password_base64_bytes = base64.b64encode(password_encoded)
+    password_base64_string = password_base64_bytes.decode("ascii")
+
+    db_connection = DbConnector()
+    result = db_connection.register(user, password_base64_string)
+    return jsonify(result[0]), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=6969)
