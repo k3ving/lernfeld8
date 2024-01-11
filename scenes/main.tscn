@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://uxn4ho62btwv"]
+
+[ext_resource type="Script" path="res://scripts/game_state.gd" id="1_ffi2s"]
+[ext_resource type="PackedScene" uid="uid://c3yj0xeromvta" path="res://scenes/player.tscn" id="1_oma3g"]
+[ext_resource type="PackedScene" uid="uid://bfkkkmifk1r3y" path="res://scenes/ball.tscn" id="2_46ja2"]
+[ext_resource type="Script" path="res://scripts/http_request.gd" id="4_gllf5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmqo4"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w4mvn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ieovl"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ffi2s")
+
+[node name="Player" parent="." instance=ExtResource("1_oma3g")]
+position = Vector2(640, 593)
+
+[node name="Ball" parent="." instance=ExtResource("2_46ja2")]
+position = Vector2(640, 571)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(165, 315)
+scale = Vector2(1, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_lmqo4")
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftWall"]
+position = Vector2(-11, 0)
+scale = Vector2(29.075, 7.065)
+texture = SubResource("PlaceholderTexture2D_w4mvn")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1005, 315)
+scale = Vector2(1, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_lmqo4")
+
+[node name="Sprite2D" type="Sprite2D" parent="RightWall"]
+position = Vector2(6, 0)
+scale = Vector2(29.075, 7.065)
+texture = SubResource("PlaceholderTexture2D_w4mvn")
+
+[node name="EndWall" type="StaticBody2D" parent="."]
+position = Vector2(587, -11)
+scale = Vector2(8.64, 2.16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndWall"]
+position = Vector2(-0.462963, -3.7037)
+scale = Vector2(6.75926, 1)
+shape = SubResource("RectangleShape2D_ieovl")
+
+[node name="ScoreLabel" type="RichTextLabel" parent="."]
+offset_left = 4.0
+offset_top = 12.0
+offset_right = 44.0
+offset_bottom = 52.0
+scale = Vector2(3.76, 2.32)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 514.0
+offset_top = 241.0
+offset_right = 741.0
+offset_bottom = 313.0
+text = "Test"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Button"]
+script = ExtResource("4_gllf5")
+
+[connection signal="button_down" from="Button" to="Button/HTTPRequest" method="_on_button_button_down"]
