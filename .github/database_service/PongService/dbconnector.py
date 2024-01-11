@@ -18,18 +18,34 @@ class DbConnector:
         connection = pyodbc.connect(self.connection_string)
         cursor = connection.cursor()
         cursor.execute("EXECUTE [dbo].[GetHighscores]")
-        return cursor.fetchall()
+        results = cursor.fetchall()
+
+        cursor.close()
+        connection.close()
+        return results
 
     def login(self, user, password):
         connection = pyodbc.connect(self.connection_string)
         cursor = connection.cursor()
         cursor.execute("EXECUTE [dbo].[Login] @User=?, @Password=?",
                        user, password)
-        return cursor.fetchone()
+        result = cursor.fetchone()
+
+        cursor.close()
+        connection.close()
+        return result
 
     def register(self, user, password):
+        print(user, password)
         connection = pyodbc.connect(self.connection_string)
         cursor = connection.cursor()
+
         cursor.execute("EXECUTE [dbo].[Register] @User=?, @Password=?",
                        user, password)
-        return cursor.fetchone()
+
+        result = cursor.fetchone()
+        cursor.commit()
+
+        cursor.close()
+        connection.close()
+        return result

@@ -31,13 +31,28 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-	SELECT
-    CASE WHEN EXISTS 
-    (
-        SELECT * FROM [Users] WHERE [UserName] = @User AND [Password] = @Password
-    )
-    THEN 1
-    ELSE 0
+	SELECT COUNT(*) as 'UserExists'
+	FROM [Users]
+	WHERE [UserName] = @User AND [Password] = @Password
+END
+_________________________________________________________________________________
+
+CREATE PROCEDURE [dbo].[Register]
+	@User nvarchar(64),
+	@Password nvarchar(MAX)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	IF NOT EXISTS (SELECT 1 FROM [Users] WHERE [UserName] = @User)
+	BEGIN
+		INSERT INTO [Users] ([UserName], [Password]) VALUES (@User, @Password)
+		SELECT 1 AS 'UserCreated'
+	END
+	ELSE
+	BEGIN
+		SELECT 0 AS 'UserCreated'
+	END
 END
 _________________________________________________________________________________
 
