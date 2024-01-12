@@ -30,6 +30,14 @@ def get_highscores():
     return data
 
 
+@app.route("/pongservice/getownscore", methods=['GET'])
+def get_own_score():
+    user = request.args.get('user')
+    db_connection = DbConnector()
+    result = db_connection.get_own_score(user)
+    return list(result)
+
+
 @app.route("/pongservice/login", methods=['GET'])
 def login():
     user = request.args.get('user')

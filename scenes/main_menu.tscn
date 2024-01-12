@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b78357bg7lu6f"]
+[gd_scene load_steps=3 format=3 uid="uid://b78357bg7lu6f"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_25ee0"]
+[ext_resource type="Script" path="res://scripts/scores_request.gd" id="2_12a0r"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,6 +11,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_25ee0")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+script = ExtResource("2_12a0r")
+
+[node name="UserLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 9.0
+offset_right = 1139.0
+offset_bottom = 49.0
+theme_override_font_sizes/normal_font_size = 30
+fit_content = true
+scroll_active = false
+text_direction = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -43,56 +58,22 @@ text = "Quit"
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 550
+theme_override_constants/margin_left = 250
 
-[node name="Scoreboard" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
 layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Scoreboard" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 10
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/Scoreboard"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer/Scoreboard/MarginContainer"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 35
-text = "1. Alegs : 230"
-fit_content = true
-scroll_active = false
-
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/MarginContainer/Scoreboard"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer/Scoreboard/MarginContainer2"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 35
-text = "1. Alegs : 230"
-fit_content = true
-scroll_active = false
-
-[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/MarginContainer/Scoreboard"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer/Scoreboard/MarginContainer3"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 35
-text = "1. Alegs : 230"
-fit_content = true
-scroll_active = false
-
-[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/MarginContainer/Scoreboard"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer/Scoreboard/MarginContainer4"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 35
-text = "1. Alegs : 230"
-fit_content = true
-scroll_active = false
 
 [connection signal="button_down" from="HBoxContainer/VBoxContainer/MarginContainer/Start Game Button" to="." method="start_game"]
 [connection signal="button_down" from="HBoxContainer/VBoxContainer/MarginContainer2/Quit Game Button" to="." method="_on_quit_game_button_button_down"]

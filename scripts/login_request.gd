@@ -19,6 +19,7 @@ func _on_request_completed(result, response_code, headers, body):
 	if response == "0":
 		error_label.text = "[center]Wrong credentials"
 	elif response == "1":
+		PlayerVariables.player_name = username_input.text
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func on_input_submit(text):

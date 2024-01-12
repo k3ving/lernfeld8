@@ -24,6 +24,16 @@ class DbConnector:
         connection.close()
         return results
 
+    def get_own_score(self, user):
+        connection = pyodbc.connect(self.connection_string)
+        cursor = connection.cursor()
+        cursor.execute("EXECUTE [dbo].[GetOwnScore] @User=?", user)
+        result = cursor.fetchone()
+
+        cursor.close()
+        connection.close()
+        return result
+
     def login(self, user, password):
         connection = pyodbc.connect(self.connection_string)
         cursor = connection.cursor()
