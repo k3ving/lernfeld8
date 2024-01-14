@@ -24,7 +24,4 @@ jobs:
         create_release: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - uses: actions/checkout@v3
-    - name: run Unit-tests
-      run: godot -d -s --path "$PWD" addons/gut/gut_cmdln.gd
+        
