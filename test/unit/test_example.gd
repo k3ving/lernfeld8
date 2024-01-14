@@ -1,28 +1,40 @@
 extends GutTest
-func before_each():
-	gut.p("ran setup", 2)
 
-func after_each():
-	gut.p("ran teardown", 2)
+var BallStart = load('res://scripts/ball_start.gd')
+var BallMove = load('res://scripts/ball_move.gd')
+var Player = load('res://scripts/player_move.gd')
 
-func before_all():
-	gut.p("ran run setup", 2)
-
-func after_all():
-	gut.p("ran run teardown", 2)
-
-func test_assert_eq_number_not_equal():
-	assert_eq(1, 2, "Should fail.  1 != 2")
-
-func test_assert_eq_number_equal():
-	assert_eq('asdf', 'asdf', "Should pass")
-
-func test_assert_true_with_true():
-	assert_true(true, "Should pass, true is true")
-
-func test_assert_true_with_false():
-	assert_true(false, "Should fail")
-
-func test_something_else():
-	assert_true(false, "didn't work")
+func test_ball_exist():
+	var _ball = BallStart.new()
+	assert_not_null(_ball)
+	
+func test_player_exist():
+	var _player = Player.new()
+	assert_not_null(_player)
+	
+func test_ball_speed():
+	var _ball = BallMove.new()
+	assert_accessors(_ball, 'speed', -200, 0)
+	
+func test_player_speed():
+	var _player = Player.new()
+	assert_accessors(_player, 'speed', 0, 200)
+	
+func test_ball_direction():
+	var _ball = BallMove.new();
+	assert_accessors(_ball,'velocity', Vector2(0, 0), Vector2(1, 1))
+	
+#func test_ball_moves_process_horizontally():
+#	var _ball = BallMove.new()
+#	_ball.set_speed(10)
+#	_ball.set_velocity(Vector2(1, 0))
+#	simulate(_ball, 1, 1)
+#	assert_eq(_ball.get_position(), Vector2(10, 0))
+	
+#func test_ball_moves_process_vertical():
+#	var _ball = BallMove.new()
+#	_ball.set_speed(10)
+#	_ball.set_velocity(Vector2(0, 1))
+#	simulate(_ball, 1, 1)
+#	assert_eq(_ball.get_position(), Vector2(0, 10))
 	
