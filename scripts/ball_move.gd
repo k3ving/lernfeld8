@@ -35,14 +35,12 @@ func _physics_process(delta):
 				if velocity.length() < 1000:
 					velocity *= 1.1
 			velocity = velocity.bounce(collision.get_normal())
-<<<<<<< HEAD
 	else:
 		ended = main_node.ended
-=======
+
 			
 func get_speed():
 	return speed
 	
 func set_speed(speedp):
 	speed = speedp 
->>>>>>> c08902d (implement unit tests(move and exist))
