@@ -41,16 +41,25 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/margin_left = 10
 
-[node name="Start Game Button" type="Button" parent="HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="StartGameButton" type="Button" parent="HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Start"
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="LogoutButton" type="Button" parent="HBoxContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Logout"
 
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 
-[node name="Quit Game Button" type="Button" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="QuitGameButton" type="Button" parent="HBoxContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Quit"
@@ -75,5 +84,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[connection signal="button_down" from="HBoxContainer/VBoxContainer/MarginContainer/Start Game Button" to="." method="start_game"]
-[connection signal="button_down" from="HBoxContainer/VBoxContainer/MarginContainer2/Quit Game Button" to="." method="_on_quit_game_button_button_down"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/MarginContainer/StartGameButton" to="." method="start_game"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/MarginContainer3/LogoutButton" to="." method="logout"]
+[connection signal="button_down" from="HBoxContainer/VBoxContainer/MarginContainer2/QuitGameButton" to="." method="quit_game"]

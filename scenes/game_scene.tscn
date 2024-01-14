@@ -1,65 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://bahdaxdq4y5ma"]
+[gd_scene load_steps=9 format=3 uid="uid://bahdaxdq4y5ma"]
 
 [ext_resource type="Script" path="res://scripts/game_state.gd" id="1_2m4wn"]
 [ext_resource type="PackedScene" uid="uid://c3yj0xeromvta" path="res://scenes/player.tscn" id="2_ch7yq"]
+[ext_resource type="PackedScene" uid="uid://bv67pt7n2wlbq" path="res://scenes/enemy.tscn" id="2_wbehw"]
 [ext_resource type="PackedScene" uid="uid://bfkkkmifk1r3y" path="res://scenes/ball.tscn" id="3_ynxw1"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmqo4"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w4mvn"]
+[ext_resource type="PackedScene" uid="uid://cbmow83ow3n1n" path="res://scenes/wall.tscn" id="4_lhp7r"]
+[ext_resource type="Script" path="res://scripts/post_score_request.gd" id="5_v2drg"]
+[ext_resource type="Script" path="res://scripts/game_over_screen.gd" id="6_xgskp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ieovl"]
-
-[sub_resource type="GDScript" id="GDScript_kqt45"]
-script/source = "extends HTTPRequest
-	
-	
-func _on_request_completed(result, response_code, headers, body):
-	var json = JSON.parse_string(body.get_string_from_utf8())
-	print(json)
-
-
-func _on_button_button_down():
-	request_completed.connect(_on_request_completed)
-	request(\"http://127.0.0.1:6969/pongservice/hello\")
-"
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2m4wn")
 
+[node name="Enemy" parent="." instance=ExtResource("2_wbehw")]
+position = Vector2(600, 60)
+
 [node name="Player" parent="." instance=ExtResource("2_ch7yq")]
-position = Vector2(640, 593)
+position = Vector2(600, 593)
 
 [node name="Ball" parent="." instance=ExtResource("3_ynxw1")]
-position = Vector2(640, 571)
-
-[node name="LeftWall" type="StaticBody2D" parent="."]
-position = Vector2(165, 315)
-scale = Vector2(1, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
-position = Vector2(-6, 0)
-shape = SubResource("RectangleShape2D_lmqo4")
-
-[node name="Sprite2D" type="Sprite2D" parent="LeftWall"]
-position = Vector2(-11, 0)
-scale = Vector2(29.075, 7.065)
-texture = SubResource("PlaceholderTexture2D_w4mvn")
-
-[node name="RightWall" type="StaticBody2D" parent="."]
-position = Vector2(1005, 315)
-scale = Vector2(1, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
-shape = SubResource("RectangleShape2D_lmqo4")
-
-[node name="Sprite2D" type="Sprite2D" parent="RightWall"]
-position = Vector2(6, 0)
-scale = Vector2(29.075, 7.065)
-texture = SubResource("PlaceholderTexture2D_w4mvn")
+position = Vector2(600, 571)
 
 [node name="EndWall" type="StaticBody2D" parent="."]
-position = Vector2(587, -11)
+position = Vector2(587, 670)
 scale = Vector2(8.64, 2.16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndWall"]
@@ -67,21 +31,103 @@ position = Vector2(-0.462963, -3.7037)
 scale = Vector2(6.75926, 1)
 shape = SubResource("RectangleShape2D_ieovl")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+z_index = 1
+offset_top = 30.0
+offset_right = 200.0
+offset_bottom = 80.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "[center]SCORE:"
+fit_content = true
+scroll_active = false
+
 [node name="ScoreLabel" type="RichTextLabel" parent="."]
-offset_left = 4.0
-offset_top = 12.0
-offset_right = 44.0
-offset_bottom = 52.0
-scale = Vector2(3.76, 2.32)
+z_index = 1
+offset_top = 80.0
+offset_right = 200.0
+offset_bottom = 130.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "[center]0"
+fit_content = true
+scroll_active = false
 
-[node name="Button" type="Button" parent="."]
-offset_left = 514.0
-offset_top = 241.0
-offset_right = 741.0
-offset_bottom = 313.0
-text = "Test"
+[node name="LWall" parent="." instance=ExtResource("4_lhp7r")]
+position = Vector2(100, 300)
+scale = Vector2(10, 35)
 
-[node name="HTTPRequest" type="HTTPRequest" parent="Button"]
-script = SubResource("GDScript_kqt45")
+[node name="RWall" parent="." instance=ExtResource("4_lhp7r")]
+position = Vector2(1052, 300)
+scale = Vector2(10, 35)
 
-[connection signal="button_down" from="Button" to="Button/HTTPRequest" method="_on_button_button_down"]
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+script = ExtResource("5_v2drg")
+
+[node name="GameOverScreen" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(500, 200)
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 350.0
+offset_top = 200.0
+offset_right = 850.0
+offset_bottom = 400.0
+grow_horizontal = 2
+script = ExtResource("6_xgskp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverScreen"]
+layout_mode = 0
+offset_left = 125.0
+offset_right = 356.0
+offset_bottom = 50.0
+theme_override_font_sizes/normal_font_size = 35
+text = "GAME ENDED"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="GameOverScreen"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 50.0
+offset_right = 375.0
+offset_bottom = 100.0
+theme_override_font_sizes/normal_font_size = 35
+text = "FINAL SCORE: "
+fit_content = true
+scroll_active = false
+
+[node name="ScoreLabel" type="RichTextLabel" parent="GameOverScreen"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 100.0
+offset_right = 375.0
+offset_bottom = 150.0
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "[center]"
+fit_content = true
+scroll_active = false
+
+[node name="RetryButton" type="Button" parent="GameOverScreen"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 133.0
+offset_right = 160.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 35
+text = "RETRY"
+
+[node name="QuitButton" type="Button" parent="GameOverScreen"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 133.0
+offset_right = 490.0
+offset_bottom = 190.0
+theme_override_font_sizes/font_size = 35
+text = "QUIT"
+
+[connection signal="button_down" from="GameOverScreen/RetryButton" to="." method="restart"]
+[connection signal="button_down" from="GameOverScreen/QuitButton" to="." method="quit_to_main"]

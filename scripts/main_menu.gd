@@ -20,6 +20,9 @@ func _process(delta):
 	
 	
 func display_scores(scores):
+	if not scores:
+		return
+		
 	scores = str_to_var(scores)
 	for i in range(scores.size()):
 		var score_instance = preload("res://scenes/score.tscn").instantiate()
@@ -30,14 +33,21 @@ func display_scores(scores):
 func display_own_score(score):
 	score = str_to_var(score)
 	
+	if typeof(score) == TYPE_NIL:
+		score = [0, 0]
+	
 	var score_instance = preload("res://scenes/score.tscn").instantiate()
 	score_instance.instantiate("[b][font_size=35]Own Highscore: " + str(score[1]))
 	get_node("HBoxContainer/MarginContainer/VBoxContainer").add_child(score_instance)
 	
 
-func _on_quit_game_button_button_down():
+func quit_game():
 	get_tree().quit()
 	
 	
 func start_game():
 	get_tree().change_scene_to_file("res://scenes/game_scene.tscn")
+	
+func logout():
+	PlayerVariables.player_name = ""
+	get_tree().change_scene_to_file("res://scenes/login_menu.tscn")
