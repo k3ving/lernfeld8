@@ -22,6 +22,7 @@ jobs:
         godot_export_templates_download_url: http://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_export_templates.tpz
         relative_project_path: ./
         create_release: true
+        run: godot -d -s --path "$PWD" addons/gut/gut_cmdln.gd
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
