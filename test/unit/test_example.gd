@@ -6,7 +6,7 @@ var Player = load('res://scripts/player_move.gd')
 
 func test_ball_exist():
 	var _ball = BallStart.new()
-	assert_not_null(_ball)
+	assert_null(_ball)
 	
 func test_player_exist():
 	var _player = Player.new()

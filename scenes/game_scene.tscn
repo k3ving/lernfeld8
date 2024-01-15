@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/game_state.gd" id="1_2m4wn"]
 [ext_resource type="PackedScene" uid="uid://c3yj0xeromvta" path="res://scenes/player.tscn" id="2_ch7yq"]
-[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="2_wbehw"]
+[ext_resource type="PackedScene" uid="uid://bv67pt7n2wlbq" path="res://scenes/enemy.tscn" id="2_wbehw"]
 [ext_resource type="PackedScene" uid="uid://bfkkkmifk1r3y" path="res://scenes/ball.tscn" id="3_ynxw1"]
-[ext_resource type="PackedScene" path="res://scenes/wall.tscn" id="4_lhp7r"]
+[ext_resource type="PackedScene" uid="uid://cbmow83ow3n1n" path="res://scenes/wall.tscn" id="4_lhp7r"]
 [ext_resource type="Script" path="res://scripts/post_score_request.gd" id="5_v2drg"]
 [ext_resource type="Script" path="res://scripts/game_over_screen.gd" id="6_xgskp"]
 
